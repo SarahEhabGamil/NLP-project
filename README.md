@@ -1,7 +1,7 @@
 # Milestone 1
 
 ## Dataset  
-Our dataset consists of transcriptions from the YouTube channel **Kareem Esmail**, which appears to be a religious podcast. Each text file in the dataset corresponds to a single episode, providing structured spoken content for analysis. The chosen NLP task for this dataset is **sentiment analysis**, allowing us to explore and classify the emotional tone conveyed throughout these episodes.
+Our dataset consists of transcriptions from the YouTube channel **Kareem Esmail**, which appears to be a religious channel. Each text file in the dataset corresponds to a single episode, providing structured spoken content for analysis. The chosen NLP task for this dataset is **sentiment analysis**, allowing us to explore and classify the emotional tone conveyed throughout these episodes.
 
 ## Data Preprocessing  
 
@@ -21,7 +21,9 @@ Our dataset consists of transcriptions from the YouTube channel **Kareem Esmail*
    We removed Arabic stopwords using NLTK to focus on important words. We downloaded Arabic stopwords, loaded them as a set, and used `remove_stopwords` to filter them out. This helps make the text cleaner and more meaningful for analysis.
    
 6. **Lemmatization**
-   We applied lemmatization using **CAMeL Tools**' built-in morphological analyzer for Modern Standard Arabic (MSA). Lemmatization reduces words to their root forms, ensuring consistency across different word variations. We prioritized extracting lemmas for nouns and verbs, as they carry the most meaning. If no noun or verb was found, we selected the best available lemma.
+   We applied lemmatization using **CAMeL Tools' `morphological analyzer`** for Modern Standard Arabic (MSA), reducing words to their root forms for consistency. The unique vocabulary size dropped from 22,022 to 11,448, eliminating 10,574 redundant variations.
+Frequent words like "انا" → "أَنَى", "الاعتقاد" → "ٱِعْتِقاد", and "عامله" → "عامِل" were standardized. However, some words like "ياخدوا" and "فرهده" remained unchanged, highlighting limitations with dialectal terms.
+Overall, lemmatization improved text consistency, reducing redundancy while preserving meaning, enhancing dataset quality for sentiment analysis.
 
 ## Data Analysis  
 
@@ -35,10 +37,20 @@ To gain insights into the most commonly used words in the transcriptions, we con
 Bigrams help us identify common word pairs that provide better context for understanding sentiment-related expressions. Since podcasts contain natural, conversational speech, analyzing single words alone might miss important meaning. Bigrams allow us to detect patterns which offer deeper insights into how opinions are expressed. By extracting and analyzing these frequent bigrams, we can better understand recurring themes and sentiment trends in podcast discussions.
 
 ### Trigrams  
-Trigrams further enhance our analysis by capturing three-word sequences that reveal even more detailed sentiment expressions. Many opinions in Arabic podcasts are conveyed through structured phrases like "لا أحب هذا". By identifying frequent trigrams, we can uncover common phrases that shape audience sentiment and highlight how opinions are typically framed in podcast conversations. This helps us gain a clearer picture of how different topics and discussions are received by listeners. 
+Trigrams further enhance our analysis by capturing three-word sequences that reveal even more detailed sentiment expressions. Many opinions in Arabic podcasts are conveyed through structured phrases. By identifying frequent trigrams, we can uncover common phrases that shape audience sentiment and highlight how opinions are typically framed in podcast conversations. This helps us gain a clearer picture of how different topics and discussions are received by listeners. 
 
+### Sentiment Analysis Using CAMeL-BERT
+We integrated the **`CAMeL-Lab/bert-base-arabic-camelbert-da-sentiment`** model for sentiment analysis. The model was loaded using the transformers library, and we applied it to our dataset to classify sentiment. The implementation tokenizes Arabic text and predicts sentiment labels based on the highest logit value.
+The last visualizations in the notebook illustrate the distribution of sentiment predictions across our two manually labelled categorical variables: themes and emotions. Each bar represents a category, with segments indicating the count of predictions for each sentiment class.
+1. The first graph shows the distribution of predicted sentiment across different themes, such as "Encouraging," "Inspirational," and "Reflective," providing insights into how sentiment aligns with various thematic categories.
+2. The second graph presents the distribution of predicted sentiment across labelled emotions, such as "Anxiety," "Motivation," and "Calm," offering an evaluation of how sentiment predictions correspond to specific emotions.
 
-
+The sentiment predictions are categorized into three distinct values:
+- 0 (Blue): Negative or low-intensity sentiment.
+- 1 (Gray): Neutral or moderate sentiment.
+- 2 (Red): Positive or high-intensity sentiment.
+  
+These visualizations indicate that our chunking and categorization align well with the sentiment classification model, as the predicted sentiment distributions across themes and emotions follow logical and expected patterns. The alignment suggests that our preprocessing effectively preserves the emotional and thematic context, ensuring meaningful sentiment predictions.
 
 ## Limitations
 
