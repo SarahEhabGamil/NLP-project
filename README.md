@@ -36,3 +36,21 @@ Bigrams help us identify common word pairs that provide better context for under
 
 ### Trigrams  
 Trigrams further enhance our analysis by capturing three-word sequences that reveal even more detailed sentiment expressions. Many opinions in Arabic podcasts are conveyed through structured phrases like "لا أحب هذا". By identifying frequent trigrams, we can uncover common phrases that shape audience sentiment and highlight how opinions are typically framed in podcast conversations. This helps us gain a clearer picture of how different topics and discussions are received by listeners. 
+
+
+
+
+## Limitations
+
+- **Incomplete Stopword Removal**  
+  The stopword removal process relies on NLTK’s Arabic stopword list, which does not cover all stopwords in Arabic. As a result, some common stopwords may still remain in the text, potentially affecting the accuracy of the sentiment classification.
+
+- **Loss of Context in Chunking**  
+  The chunking method splits text into segments based on three lines. While this maintains coherence to some extent, some contextual relationships between sentences may be lost, impacting the sentiment analysis results.
+
+- **Potential Misclassification in Clustering**  
+  The K-Means clustering algorithm assumes that the data is well-separated into the predefined number of clusters. However, sentiment is often nuanced and does not always fit neatly into distinct clusters. This may lead to some misclassifications, especially if different emotional tones appear within the same cluster.
+
+- **TF-IDF’s Lack of Context Awareness**  
+  TF-IDF vectorization captures word importance based on frequency but does not account for the semantic meaning of words or their order in a sentence. Sentiment analysis often depends on context, negation, and nuanced phrasing, which TF-IDF cannot fully capture. This limitation may result in misclassifications, especially in cases where sentiment is expressed through idioms, sarcasm, or negation.
+
