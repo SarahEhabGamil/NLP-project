@@ -138,6 +138,22 @@ Some of the Libraries we used in the project, their purpose and the reason why w
 
 4. GloVe embeddings were incorporated to enrich the model with pre-trained word representations, enabling better semantic understanding of the input text without requiring a more complex or computationally heavy model.
 
+Limitations
+
+While our implementation effectively demonstrates a shallow neural network's ability to perform basic question answering using the SQuAD dataset, several limitations impacted both the performance of our model and how general it is:
+
+1. Model Complexity
+   We intentionally built a shallow model without attention mechanisms or transformer-based architectures. While this aligns with the milestone goal, it inherently limits the model’s ability to capture long-range dependencies and nuanced relationships between context and question.
+
+2. Limited Dataset Size 
+   To manage training time and resource constraints, we worked with a reduced subset of SQuAD (5,000–20,000 samples). Although sufficient for basic learning, this small dataset size may prevent the model from generalizing well to unseen examples or handling rare linguistic patterns.
+
+3. No Attention Mechanism 
+   State-of-the-art QA systems rely on attention to highlight relevant parts of the context. Our model lacks this mechanism, which limits its ability to focus on context regions most relevant to the question.
+
+4. No Answerability Check
+   The model always assumes an answer exists in the context, even if it’s ambiguous or partially aligned. There’s no logic to reject unanswerable questions or flag low-confidence predictions.
+
 Conclusion
 
 We successfully implemented a shallow neural network model for the question answering task using the SQuAD dataset. Our model used pre-trained embeddings and a BiLSTM layer to predict start and end positions of answers within a given context.
