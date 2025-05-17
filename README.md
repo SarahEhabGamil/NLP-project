@@ -82,11 +82,12 @@ Each model was evaluated using Hugging Face's `pipeline("question-answering")` i
 
 | Question | Partial FT Answer | Full FT Answer | Observation |
 |----------|--------------------|----------------|-------------|
-| Who wrote *1984*? | George Orwell and published in 1949 | Same | Over-extended |
-| Tallest mountain? | 8,848 meters | ✅ Mount Everest | Full FT correct |
-| DNA stands for? | ✅ Correct | ✅ Correct | Full more confident |
-| Moon landing? | Neil Armstrong | Same | Wrong type (date expected) |
-| Red Planet? | Red Planet | ✅ Mars | Full FT correct |
+| Who wrote *1984*? | Answer: George Orwell and published in 1949<br>Score: **0.0303**<br>Start: 30<br>End: 65 | Answer: George Orwell and published in 1949<br>Score: **0.0141**<br>Start: 30<br>End: 65 | Over-extended span |
+| Tallest mountain? | Answer: 8,848 meters<br>Score: **0.0110**<br>Start: 69<br>End: 81 | ✅ Answer: Mount Everest<br>Score: **0.0086**<br>Start: 0<br>End: 13 | Full FT selected the correct entity |
+| DNA stands for? | ✅ Answer: Deoxyribonucleic Acid<br>Score: **0.0130**<br>Start: 15<br>End: 36 | ✅ Answer: Deoxyribonucleic Acid<br>Score: **0.0164**<br>Start: 15<br>End: 36 | Full FT was slightly more confident |
+| Moon landing? | Answer: Neil Armstrong<br>Score: **0.0394**<br>Start: 0<br>End: 14 | Answer: Neil Armstrong<br>Score: **0.0168**<br>Start: 0<br>End: 14 | Wrong entity type (expected date) |
+| Red Planet? | Answer: Red Planet<br>Score: **0.0067**<br>Start: 33<br>End: 43 | ✅ Answer: Mars<br>Score: **0.0046**<br>Start: 0<br>End: 4 | Full FT predicted correct entity |
+
 
 - **Partial FT** showed strong performance even with less data
 - **Full FT** improved span prediction and semantic accuracy
